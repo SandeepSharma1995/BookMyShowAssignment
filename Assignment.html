@@ -1,0 +1,47 @@
+<html>
+<head>
+<script type = "text/javascript">
+
+var existingArray=[7000,7001,7002,7003,7004,7005];
+var duplicatesValueArray=[];
+
+function removeDuplicates(){
+var data=document.getElementById("formInput").value;
+dataList=data.split(',');
+dataList.forEach(
+function myFunction(item, index) {
+if(item.includes('-')){
+lowerValue=item.split('-')[0];
+upperValue=item.split('-')[1];
+
+for(var i=lowerValue;i<=upperValue;i++){
+if(existingArray.includes(Number(i))){
+duplicatesValueArray.push(Number(i));
+}}
+}
+else{
+if (existingArray.includes(Number(item))){
+duplicatesValueArray.push(Number(item));
+}}
+})
+
+var duplicatesList=duplicatesValueArray.length!=0?duplicatesValueArray:'No duplicates found';
+var uniqueList =existingArray.filter(x => !duplicatesList.includes(x));
+var finalList=uniqueList.length!=0?uniqueList:'No additions'
+document.getElementById('duplicatesList').innerHTML="Duplicates found in input: "+duplicatesList;
+document.getElementById('finalList').innerHTML="New additions: "+ finalList;
+document.getElementById("formInput").value='';
+}
+</script>
+</head>
+<body>
+<textarea rows="3" placeholder="Enter input to remove duplicates" class="formInput" id="formInput"></textarea>
+<button  onclick="removeDuplicates()">Remove Duplicates</button>
+
+<p id="duplicatesList"></p>
+<p id="finalList"></p>
+
+
+</body>
+</html>
+
